@@ -2,14 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="CounterStrikeSharp.API">
       <HintPath>lib/CounterStrikeSharp.API.dll</HintPath>
+      <Private>true</Private>
     </Reference>
   </ItemGroup>
 
