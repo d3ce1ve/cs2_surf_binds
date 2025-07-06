@@ -2,15 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="CounterStrikeSharp.API">
       <HintPath>lib/CounterStrikeSharp.API.dll</HintPath>
       <Private>true</Private>
+      <CopyLocal>true</CopyLocal>
     </Reference>
   </ItemGroup>
 
