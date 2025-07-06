@@ -16,13 +16,16 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: Build DLL
+    - name: Download CounterStrikeSharp.API.dll
       run: |
         mkdir -p lib
         curl -L -o lib/CounterStrikeSharp.API.dll https://github.com/roflmuffin/CounterStrikeSharp/releases/latest/download/CounterStrikeSharp.API.dll
-        dotnet build -c Release
 
-    - name: Upload DLL
+    - name: Build the plugin
+      run: dotnet build -c Release
+
+    - name: Upload compiled DLL
       uses: softprops/action-gh-release@v2
       with:
-        files: bin/Release/net8.0/SurfBinds.dll
+        files: |
+          bin/Release/net8.0/SurfBinds.dll
