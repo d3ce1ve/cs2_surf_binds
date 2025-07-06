@@ -9,23 +9,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '8.0.x'
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
 
-    - name: Download CounterStrikeSharp.API.dll
-      run: |
-        mkdir -p lib
-        curl -L -o lib/CounterStrikeSharp.API.dll https://github.com/roflmuffin/CounterStrikeSharp/releases/latest/download/CounterStrikeSharp.API.dll
+      - name: Create lib folder
+        run: mkdir -p lib
 
-    - name: Build the plugin
-      run: dotnet build -c Release
+      - name: Download CounterStrikeSharp.API.dll
+        run: |
+          curl -L -o lib/CounterStrikeSharp.API.dll \
+            https://github.com/roflmuffin/CounterStrikeSharp/releases/latest/download/CounterStrikeSharp.API.dll
 
-    - name: Upload compiled DLL
-      uses: softprops/action-gh-release@v2
-      with:
-        files: |
-          bin/Release/net8.0/SurfBinds.dll
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build plugin
+        run: dotnet build -c Release --no-restore
+
+      - name: Upload compiled DLL
+        uses: softprops/action-gh-release@v2
+        with:
+          files: bin/Release/net8.0/SurfBinds.dll
