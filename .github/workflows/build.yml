@@ -1,0 +1,28 @@
+name: Build Plugin
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build DLL
+      run: |
+        mkdir -p lib
+        curl -L -o lib/CounterStrikeSharp.API.dll https://github.com/roflmuffin/CounterStrikeSharp/releases/latest/download/CounterStrikeSharp.API.dll
+        dotnet build -c Release
+
+    - name: Upload DLL
+      uses: softprops/action-gh-release@v2
+      with:
+        files: bin/Release/net8.0/SurfBinds.dll
