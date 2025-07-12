@@ -21,3 +21,10 @@ jobs:
 
     - name: Build
       run: dotnet build --configuration Release
+
+    - name: Upload plugin DLL
+      uses: actions/upload-artifact@v4
+      with:
+        name: SurfBindsPlugin
+        path: |
+          **/bin/Release/net8.0/*.dll
