@@ -17,14 +17,14 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore SurfBindsPlugin.csproj
 
-    - name: Build
-      run: dotnet build --configuration Release
+    - name: Build plugin
+      run: dotnet build SurfBindsPlugin.csproj --configuration Release
 
     - name: Upload plugin DLL
       uses: actions/upload-artifact@v4
       with:
         name: SurfBindsPlugin
         path: |
-          **/bin/Release/net8.0/*.dll
+          ./bin/Release/net8.0/*.dll
